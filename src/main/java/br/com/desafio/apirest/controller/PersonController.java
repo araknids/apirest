@@ -1,6 +1,5 @@
 package br.com.desafio.apirest.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.desafio.apirest.domain.Endereco;
-import br.com.desafio.apirest.domain.Pessoa;
-import br.com.desafio.apirest.service.PessoaService;
+import br.com.desafio.apirest.domain.Person;
+import br.com.desafio.apirest.service.PersonService;
 
 @RestController
-@RequestMapping("pessoa")
-public class PessoaController {
+@RequestMapping("person")
+public class PersonController {
 	
 	@Autowired
-	private PessoaService pessoaService;
+	private PersonService pessoaService;
 	
 	/**
 	 * 
@@ -28,8 +26,8 @@ public class PessoaController {
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 16/07/2021 17:36:00
 	 */
-	@GetMapping("listar")
-	public List<Pessoa> listarPessoas(){
+	@GetMapping("list")
+	public List<Person> listPeople(){
 //		List<Pessoa> listamock = new ArrayList<>();
 //		Pessoa p = new Pessoa();
 //		p.setNome("rodrgo");
@@ -37,7 +35,7 @@ public class PessoaController {
 //		p.setEnd(new Endereco("rua 1", "chavantes"));
 //		listamock.add(p);
 //		return listamock;
-		return pessoaService.listarPessoas();
+		return pessoaService.listPeople();
 	}
 	
 	/**
@@ -46,9 +44,9 @@ public class PessoaController {
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 16/07/2021 17:32:44
 	 */
-	@PostMapping("incluir")
-	public Pessoa incluirPessoa(@RequestBody Pessoa novaPessoa){
-		return pessoaService.incluirPessoa(novaPessoa);
+	@PostMapping("save")
+	public Person savePerson(@RequestBody Person newPerson){
+		return pessoaService.savePerson(newPerson);
 	}
 
 	/**
@@ -57,9 +55,9 @@ public class PessoaController {
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 17/07/2021 10:47:45
 	 */
-	@PostMapping("alterar/{cpf}")
-	public Pessoa alterarPessoa(@RequestBody Pessoa novaPessoa, @PathVariable String cpf){
-		return pessoaService.alterarPessoa(novaPessoa, cpf);
+	@PostMapping("update/{id}")
+	public Person updatePerson(@RequestBody Person newPerson, @PathVariable String id){
+		return pessoaService.updatePerson(newPerson, id);
 	}
 	
 	/**
@@ -68,8 +66,8 @@ public class PessoaController {
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 17/07/2021 10:59:37
 	 */
-	@PostMapping("excluir/{cpf}")
-	public void excluirPessoa(@PathVariable String cpf){
-		pessoaService.excluirPessoa(cpf);
+	@PostMapping("delete/{cpf}")
+	public void deletePerson(@PathVariable String id){
+		pessoaService.deletePerson(id);
 	}
 }

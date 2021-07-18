@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @DynamoDBDocument
-public class Endereco {
+public class Address {
 
 	@DynamoDBAttribute
-	private String rua;
+	private String street;
 	
 	@DynamoDBAttribute
-	private String cidade;
+	private String city;
 	
 }

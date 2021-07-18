@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.desafio.apirest.domain.Pessoa;
-import br.com.desafio.apirest.repository.PessoaRepository;
+import br.com.desafio.apirest.domain.Person;
+import br.com.desafio.apirest.repository.PersonRepository;
 
 @Service
-public class PessoaServiceImpl implements PessoaService{
+public class PersonServiceImpl implements PersonService{
 	
 	@Autowired
-	private PessoaRepository pessoaRepository;
+	private PersonRepository pessoaRepository;
 
 	/**
 	 * 
@@ -20,8 +20,8 @@ public class PessoaServiceImpl implements PessoaService{
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 17/07/2021 10:58:58
 	 */
-	public List<Pessoa> listarPessoas(){
-		return pessoaRepository.listarPessoas();
+	public List<Person> listPeople(){
+		return pessoaRepository.listPeople();
 	}
 	
 	/**
@@ -30,8 +30,8 @@ public class PessoaServiceImpl implements PessoaService{
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 17/07/2021 10:59:01
 	 */
-	public Pessoa incluirPessoa(Pessoa novaPessoa){
-		return pessoaRepository.incluirPessoa(novaPessoa);
+	public Person savePerson(Person novaPessoa){
+		return pessoaRepository.save(novaPessoa);
 	}
 
 	/**
@@ -40,8 +40,9 @@ public class PessoaServiceImpl implements PessoaService{
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 17/07/2021 10:59:04
 	 */
-	public Pessoa alterarPessoa(Pessoa novaPessoa, String cpf){
-		return pessoaRepository.alterarPessoa(novaPessoa, cpf);
+	public Person updatePerson(Person novaPessoa, String id){
+		novaPessoa.setId(id);
+		return pessoaRepository.save(novaPessoa);
 	}
 	
 	/**
@@ -50,8 +51,8 @@ public class PessoaServiceImpl implements PessoaService{
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 17/07/2021 10:59:07
 	 */
-	public void excluirPessoa(String cpf){
-		pessoaRepository.excluirPessoa(cpf);
+	public void deletePerson(String id){
+		pessoaRepository.listPeople(id);
 	}
 	
 }

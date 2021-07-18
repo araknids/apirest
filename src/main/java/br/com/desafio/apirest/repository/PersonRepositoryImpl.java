@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBSaveExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.ExpectedAttributeValue;
 
-import br.com.desafio.apirest.domain.Pessoa;
+import br.com.desafio.apirest.domain.Person;
 
 @Service
-public class PessoaRepositoryImpl implements PessoaRepository{
+public class PersonRepositoryImpl implements PersonRepository{
 	
 	@Autowired
 	private DynamoDBMapper mapper;
@@ -22,8 +25,8 @@ public class PessoaRepositoryImpl implements PessoaRepository{
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 17/07/2021 11:06:31
 	 */
-	public List<Pessoa> listarPessoas(){
-		return mapper.scan(Pessoa.class, new DynamoDBScanExpression());
+	public List<Person> listPeople(){
+		return mapper.scan(Person.class, new DynamoDBScanExpression());
 	}
 	
 	/**
@@ -32,22 +35,11 @@ public class PessoaRepositoryImpl implements PessoaRepository{
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 17/07/2021 11:06:36
 	 */
-	public Pessoa incluirPessoa(Pessoa novaPessoa){
-		mapper.save(novaPessoa);
-		return novaPessoa;
-	}
-
-	/**
-	 * 
-	 * Método responsável em alterar uma pessoa já existente no banco de dados
-	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
-	 * @since 17/07/2021 11:06:38
-	 */
-	public Pessoa alterarPessoa(Pessoa novaPessoa, String cpf){
-		Pessoa pessoa = mapper.load(Pessoa.class, cpf);
+	public Person save(Person pessoa){
 		mapper.save(pessoa);
 		return pessoa;
 	}
+
 	
 	/**
 	 * 
@@ -55,8 +47,8 @@ public class PessoaRepositoryImpl implements PessoaRepository{
 	 * @author Rodrigo de Lima Horacio <rodrigo.horacio.contato@gmail.com>
 	 * @since 17/07/2021 11:06:45
 	 */
-	public void excluirPessoa(String cpf){
-		mapper.delete(cpf);
+	public void listPeople(String id){
+		mapper.delete(id);
 	}
 
 }
